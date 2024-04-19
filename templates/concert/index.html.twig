@@ -3,6 +3,57 @@
 {% block title %}Concert index{% endblock %}
 
 {% block body %}
+
+    <div class="no-bottom no-top" id="content">
+            <div id="top"></div>
+            
+            <!-- section begin -->
+            <section id="subheader" class="text-light" data-bgimage="url(images/background/subheader.jpg) bottom">
+                    <div class="center-y relative text-center">
+                        <div class="container">
+                            <div class="row">
+                                
+                                <div class="col-md-12 text-center">
+									<h1>Concert</h1>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+            <!-- section close -->
+            <section aria-label="section">
+                <div class="container">
+                    <div class="row g-custom-x">
+                    {% for concert in concerts %}
+                        <div class="col-lg-4 col-md-6 mb20">
+                            <div class="de-event-item">
+                                <div class="d-content">
+                                    <div class="d-image">
+                                        <span class="d-image-wrap"><img alt="" src="{{asset('/images/blog/1.jpg')}}" class="lazy"></span>
+                                        <span class="d-date">
+                                        
+                                            <span class="d-mm">{{ concert.StartAt ? concert.StartAt|date('M') : '' }}</span>
+                                            <span class="d-dd">{{ concert.StartAt ? concert.StartAt|date('j') : '' }}</span>
+                                        </span>
+                                    </div>
+                                    <div class="d-text">                                            
+                                        <a href="01_rockfest-blog-single.html"><h4>{{ concert.Name }}</h4></a>
+                                        <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat...</p>       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </div>
+                </div>
+            </section>
+    </div>
+
     <h1>Concert index</h1>
 
     <table class="table">

@@ -38,8 +38,8 @@
                                         <div class="de-flex-col">
                                             <!-- logo begin -->
                                             <div id="logo">
-                                                <a href="index.html">
-                                                    <img alt="" src="images/logo.png" />
+                                                <a href="{{path('app_home')}}">
+                                                    <img alt="" src="{{asset('/images/logo.png')}}" />
                                                 </a>
                                             </div>
                                             <!-- logo close -->
@@ -50,40 +50,16 @@
                                     <div class="de-flex-col header-col-mid">
                                         <!-- mainmenu begin -->
                                         <ul id="mainmenu">
-                                            <li><a href="#de-carousel">Home</a>
-                                                <ul>
-                                                    <li><a href="index.html">Rockfest</a></li>
-                                                    <li><a href="02_djfest-index.html">DJFest</a></li>
-                                                    <li><a href="03_electrofest-index.html">Electrofest</a></li>
-                                                    <li><a href="01_rockfest-index-video.html">Rockfest Video</a></li>
-                                                </ul>
-                                            </li>                                   
-                                            <li><a href="#section-artists">Artists</a></li>                  
-                                            <li><a href="#section-schedule">Schedule</a></li>             
-                                            <li><a href="#section-tickets">Tickets</a></li>
-                                            <li><a href="#section-gallery">Gallery</a></li>
-                                            <li><a href="#">Pages</a>
-                                                <ul>
-                                                    <li><a href="01_rockfest-blog.html">Blog</a></li>
-                                                    <li><a href="01_rockfest-contact.html">Contact</a></li>
-                                                    <li><a href="01_rockfest-gallery.html">Gallery</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Elements</a>
-                                                <ul>
-                                                    <li><a href="icons-elegant.html">Icons Elegant</a></li>
-                                                    <li><a href="icons-etline.html">Icons Etline</a></li>
-                                                    <li><a href="icons-font-awesome.html">Icons Font Awesome</a></li>
-                                                    <li><a href="popover.html">Popover</a></li>
-                                                    <li><a href="tabs.html">Tabs</a></li>
-                                                    <li><a href="tooltips.html">Tooltips</a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href="{{path('app_home')}}">Home</a></li>                                   
+                                            <li><a href="{{path('app_concert_index')}}">Concert</a></li>                  
+                                            <li><a href="#">Théatre</a></li>             
+                                            <li><a href="#">Evénements sportifs</a></li>
+                                            <li><a href="#">Gallerie</a></li>
                                         </ul>
                                     </div>
                                     <div class="de-flex-col">
                                         <div class="menu_side_area">
-                                            <a href="#section-tickets" class="btn-main"><i class="fa fa-sign-in"></i><span>Buy Ticket</span></a>
+                                            <a href="#" class="btn-main"><i class="fa fa-sign-in"></i><span>Se connecter</span></a>
                                             <span id="menu-btn"></span>
                                         </div>
                                     </div>
@@ -197,7 +173,7 @@
             <script src="{{asset ('js/designesia.js') }}"></script>
 
             <!-- COOKIES PLUGIN  -->
-            <script>
+            {# <script>
             $(document).ready(function() {
                 $.cookit({
                 backgroundColor: '#111111',
@@ -210,11 +186,11 @@
                 buttonText: "I accept",
                 });
             });
-            </script>
+            </script> #}
         </div>
-        <div id="selector">
+        {# <div id="selector">
             <div id="demo-rtl" class="sc-opt">
             <div class="sc-icon">RTL</div><span class="sc-val">Click to Enable</span>
-        </div>
+        </div> #}
     </body>
 </html>
