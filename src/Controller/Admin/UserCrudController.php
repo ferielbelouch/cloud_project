@@ -7,7 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -22,10 +22,11 @@ class UserCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnDetail(),
             TextField::new('email'),
-            ArrayField::new('role', 'Role')->setFormTypeOptions([
-                'data' => ['Role_user'] // Valeur par défaut
-            ]),
+            ArrayField::new('roles', 'Roles')->setCustomOption('choices', [
+                'User' => 'ROLE_USER',
+                'Admin' => 'ROLE_ADMIN',
+                'Super Admin' => 'ROLE_SUPER_ADMIN',
+            ]), // Masquer ce champ dans la liste des utilisateurs
         ];
     }
-    
 }

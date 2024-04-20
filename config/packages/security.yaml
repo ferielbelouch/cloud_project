@@ -4,11 +4,11 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -16,16 +16,12 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-
-            # anonymous: ~
-            form_login:
-                login_path: login
-                check_path: login
+            
             logout:
-                path: logout
-                target: homepage
-            remember_me:
-                secret: '%kernel.secret%'
+                path: app_logout
+                target: app_home
+
+            custom_authenticator: App\Security\AppCustomAuthenticator
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -35,14 +31,14 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-
+        - { path: '^/admin', roles: [IS_AUTHENTICATED_FULLY, ROLE_SPEC] }
 
 
     role_hierarchy:
-        ROLE_ADMIN:       Role_user
-        ROLE_SUPER_ADMIN: Role_admin
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SPEC: ROLE_SPEC
+
         
 when@test:
     security:
