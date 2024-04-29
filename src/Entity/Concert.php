@@ -34,6 +34,9 @@ class Concert
     #[ORM\OneToMany(targetEntity: Ticket::class, mappedBy: 'concert')]
     private Collection $Tickets;
 
+    #[ORM\Column(type: "datetime_immutable", nullable: true, options: ["default" => "CURRENT_TIMESTAMP"])]
+    private ?\DateTimeImmutable $createdAt = null;
+
     public function __construct()
     {
         $this->Tickets = new ArrayCollection();
@@ -132,5 +135,16 @@ class Concert
         }
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): void
+    {
+        $this->createdAt = new \DateTime();
+
     }
 }

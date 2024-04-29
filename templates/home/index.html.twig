@@ -14,6 +14,7 @@
                     <li data-mdb-target="#de-carousel" data-mdb-slide-to="0" class="active"></li>
                     <li data-mdb-target="#de-carousel" data-mdb-slide-to="1"></li>
                     <li data-mdb-target="#de-carousel" data-mdb-slide-to="2"></li>
+                    <li data-mdb-target="#de-carousel" data-mdb-slide-to="3"></li>
                 </ol>
                 <!-- Inner -->
                 <div class="carousel-inner">
@@ -24,10 +25,9 @@
                                 <div class="container text-white text-center">
                                     <div class="row">
                                         <div class="col-md-6 offset-md-3">
-                                            <h1 class="mb-3 wow fadeInUp">The Biggest Music Event of the Year</h1>
-                                            <p class="lead wow fadeInUp" data-wow-delay=".3s">The biggest music event in decades. Attended by more than 100 musicians from all over the world. Get your ticket now!</p>
+                                            <h1 class="mb-3 wow fadeInUp">Vivez l'émotion en première rangée</h1>
+                                            <p class="lead wow fadeInUp" data-wow-delay=".3s">Plongez dans un monde de divertissement inoubliable avec notre sélection exclusive de spectacles, concerts et événements sportifs. Réservez vos billets dès maintenant pour vivre des moments magiques en famille ou entre amis</p>
                                             <div class="spacer-10"></div>
-                                            <a href="#section-artists" class="btn-main wow fadeInUp" data-wow-delay=".6s">Explore</a>
                                         </div>
                                     </div>
                                 </div>
@@ -41,10 +41,24 @@
                                 <div class="container text-white text-center">
                                     <div class="row">
                                         <div class="col-md-6 offset-md-3">
-                                            <h1 class="mb-3 wow fadeInUp">Be a part of musical history</h1>
-                                            <p class="lead wow fadeInUp" data-wow-delay=".3s">The biggest music event in decades. Attended by more than 100 musicians from all over the world. Get your ticket now!</p>
+                                            <h1 class="mb-3 wow fadeInUp">Des spectacles époustouflants à portée de clic</h1>
+                                            <p class="lead wow fadeInUp" data-wow-delay=".3s">Txplorez une multitude d'expériences sensorielles avec notre gamme variée d'événements. De la musique enivrante aux performances théâtrales captivantes, trouvez votre prochaine source d'inspiration ici et créez des souvenirs inoubliables !</p>
                                             <div class="spacer-10"></div>
-                                            <a href="#section-artists" class="btn-main wow fadeInUp" data-wow-delay=".6s">Explore</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bgimage="{{ asset('/images/gallery/2.jpg') }}">
+                        <div class="mask">
+                            <div class="d-flex justify-content-center align-items-center h-100 wow f">
+                                <div class="container text-white text-center">
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-3">
+                                            <h1 class="mb-3 wow fadeInUp">Les meilleurs événements vous attendent ici !</h1>
+                                            <p class="lead wow fadeInUp" data-wow-delay=".3s">Ressentez l'adrénaline monter alors que vous découvrez notre catalogue d'événements sportifs palpitants. Des matchs de haut niveau aux compétitions passionnantes, assurez-vous d'être aux premières loges pour vivre chaque moment intense !</p>
+                                            <div class="spacer-10"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -64,29 +78,32 @@
                 </a>
             </section>
             <!-- Carousel wrapper -->
+            {% if latest_concert is not null %}
             <section id="section-date">
                 <div class="container">
                     <div class="row g-custom-x align-items-center">
                         <div class="col-lg-12">
                             <div class="text-center">
-                                <h2 class="wow fadeInUp" data-wow-delay="0s">Aug 23-28</h2>
-                                <h3 class="wow fadeInUp" data-wow-delay=".2s"><span class="id-color">Allegiant Stadium, Las Vegas, NV, United States</span>
+                                <h2 class="wow fadeInUp" data-wow-delay="0s">{{ latest_concert.StartAt ? latest_concert.StartAt|date('d M') : '' }}</h2>
+                                <h3 class="wow fadeInUp" data-wow-delay=".2s"><span class="id-color">{{ latest_concert.Description }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+            {% endif %}
             <section id="section-artists">
                 <div class="container">
                     <div class="row g-custom-x align-items-center">
                         <div class="col-lg-12">
                             <div class="text-center">
-                                <div class="wm wow slideInUp">Artists</div>
-                                <h2 class="wow fadeInUp" data-wow-delay=".2s"><span class="id-color">01</span> Artists</h2>
+                                <div class="wm wow slideInUp">Evénements</div>
+                                <h2 class="wow fadeInUp" data-wow-delay=".2s"><span class="id-color">Derniers</span> événements</h2>
                                 <div class="small-border bg-color-2"></div>
                                 <div class="spacer-single"></div>
                             </div>
                         </div>
+                        {% for ThreelatestConcerts in ThreelatestConcert %}
                         <div class="col-md-4">
                             <div class="de-image-text s2 wow flipInY">
                                 <a href="#" class="d-text">
@@ -95,22 +112,7 @@
                                 <img src="images/misc/featured-1.jpg" class="img-fluid" alt="">
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="de-image-text s2 wow flipInY">
-                                <a href="#" class="d-text">
-                                    <h3>Guns n Roses</h3>
-                                </a>
-                                <img src="images/misc/featured-2.jpg" class="img-fluid" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="de-image-text s2 wow flipInY">
-                                <a href="#" class="d-text">
-                                    <h3>Pearl Jam</h3>
-                                </a>
-                                <img src="images/misc/featured-3.jpg" class="img-fluid" alt="">
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                     <div class="row">
                         <div class="col-md-10 offset-md-1 text-center">
