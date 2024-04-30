@@ -33,7 +33,7 @@ class ConcertRepository extends ServiceEntityRepository
                 ->getOneOrNullResult();
         }
 
-        public function findThreeLastConcert(): ?Concert
+        public function findThreeLastConcert(): ?array
         {
             return $this->createQueryBuilder('c')
                 ->orderBy('c.createdAt', 'DESC')
