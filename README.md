@@ -1,22 +1,39 @@
 <h1>Projet Symfony - Vente de Billets d'Événements </h1>
 
-Bienvenue dans notre projet Symfony de vente de billets d'événements ! Ce projet vous permettra de gérer la vente de billets pour différents types d'événements et spectacles.
+<p>Bienvenue dans notre projet Symfony de vente de billets d'événements ! Ce projet vous permettra de gérer la vente de billets pour différents types d'événements et spectacles. </p>
 
-Comment lancer le projet
+Comment lancer le projet : <br>
+
 Suivez ces étapes simples pour lancer le projet depuis le dépôt GitHub :
 
-Prérequis
+<h4>Prérequis</h4>
 Assurez-vous d'avoir installé les éléments suivants sur votre système :
 
-PHP (version >= 7.4)
-Composer
-Symfony CLI
-MySQL (ou tout autre SGBD supporté par Symfony)
-Étapes
-Clonez le dépôt
-bash
-Copy code
+<ul>
+  <li>
+    PHP (version >= 7.4)
+  </li>
+   <li>
+    Composer
+  </li>
+   <li>
+    Symfony CLI
+  </li>
+   <li>
+    MySQL (ou tout autre SGBD supporté par Symfony)
+  </li>
+</ul>
+
+
+
+
+<h4>Étapes</h4>
+
+1. Clonez le dépôt
+“““ bash
 git clone https://github.com/votre-utilisateur/vente-billets-projet.git
+“““ 
+
 Installez les dépendancesDéplacez-vous dans le répertoire du projet et exécutez la commande suivante pour installer les dépendances via Composer :
 bash
 Copy code
