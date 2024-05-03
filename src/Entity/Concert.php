@@ -6,6 +6,8 @@ use App\Repository\ConcertRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ConcertRepository::class)]
@@ -34,14 +36,24 @@ class Concert
     #[ORM\OneToMany(targetEntity: Ticket::class, mappedBy: 'concert')]
     private Collection $Tickets;
 
-    #[ORM\Column(type: "datetime_immutable", nullable: true, options: ["default" => "CURRENT_TIMESTAMP"])]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(type: "datetime", nullable: true, options: ["default" => "CURRENT_TIMESTAMP"])]
+    private ?\DateTime $createdAt = null;
 
     /**
      * @var Collection<int, Artist>
      */
     #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'event')]
     private Collection $artists;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
+     /**
+     * @Vich\UploadableField(mapping="concert_images", fileNameProperty="imageName")
+     * @ORM\Column(type="string", length=255, nullable=true).
+     * @var File|null
+     */
+    private $imageFile;
 
     public function __construct()
     {
@@ -144,12 +156,12 @@ class Concert
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): void
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = new \DateTime();
 
@@ -180,5 +192,27 @@ class Concert
         }
 
         return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
     }
 }

@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/concert')]
 class ConcertController extends AbstractController
@@ -29,7 +30,12 @@ class ConcertController extends AbstractController
         $form = $this->createForm(ConcertType::class, $concert);
         $form->handleRequest($request);
 
+      
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $concert->setCreatedAt(new \DateTime('now'));
+            $this->handleImageUpload($form, $concert);
+
             $entityManager->persist($concert);
             $entityManager->flush();
 
@@ -77,5 +83,23 @@ class ConcertController extends AbstractController
         }
 
         return $this->redirectToRoute('app_concert_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    private function handleImageUpload($form, $concert)
+    {
+        $imageFile = $form->get('imageFile')->getData();
+        if ($imageFile) {
+            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = $originalFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+            try {
+                $imageFile->move(
+                    $this->getParameter('upload_destination'),
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                // handle exception if something happens during file upload
+            }
+            $concert->setImage($newFilename);
+        }
     }
 }

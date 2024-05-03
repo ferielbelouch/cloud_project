@@ -24,6 +24,9 @@ class Ticket
     #[ORM\OneToMany(targetEntity: TicketCat::class, mappedBy: 'ticket', orphanRemoval: true)]
     private Collection $ticketCats;
 
+    #[ORM\ManyToOne(inversedBy: 'ticket')]
+    private ?Commande $commande = null;
+
     public function __construct()
     {
         $this->ticketCats = new ArrayCollection();
@@ -72,6 +75,18 @@ class Ticket
                 $ticketCat->setTicket(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): static
+    {
+        $this->commande = $commande;
 
         return $this;
     }
