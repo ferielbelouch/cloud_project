@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Concert index{% endblock %}
+{% block title %}Rockfest - Concert{% endblock %}
 
 {% block body %}
 
@@ -30,15 +30,18 @@
                             <div class="de-event-item">
                                 <div class="d-content">
                                     <div class="d-image">
+                                    {% if concert.image %}
+                                        <span class="d-image-wrap"><img alt="" src="{{ asset('images/concertsUpload/' ~ concert.image) }}" class="lazy" alt="Concert Image" style="width: 400px; height: 280px; object-fit: cover;"></span>
+                                    {% else %}
                                         <span class="d-image-wrap"><img alt="" src="{{asset('/images/blog/1.jpg')}}" class="lazy"></span>
+                                    {% endif %}
                                         <span class="d-date">
-                                        
                                             <span class="d-mm">{{ concert.StartAt ? concert.StartAt|date('M') : '' }}</span>
                                             <span class="d-dd">{{ concert.StartAt ? concert.StartAt|date('j') : '' }}</span>
                                         </span>
                                     </div>
                                     <div class="d-text">                                            
-                                        <a href="01_rockfest-blog-single.html"><h4>{{ concert.Name }}</h4></a>
+                                        <a href="{{ path('app_concert_show', {'id': concert.id}) }}"><h4>{{ concert.Name }}</h4></a>
                                         <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat...</p>       
                                     </div>
                                 </div>

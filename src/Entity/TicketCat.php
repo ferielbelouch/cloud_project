@@ -17,9 +17,6 @@ class TicketCat
     #[ORM\JoinColumn(nullable: false)]
     private ?Ticket $ticket = null;
 
-    #[ORM\ManyToOne(inversedBy: 'ticket')]
-    private ?Commande $commande = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -37,15 +34,5 @@ class TicketCat
         return $this;
     }
 
-    public function getCommande(): ?Commande
-    {
-        return $this->commande;
-    }
-
-    public function setCommande(?Commande $commande): static
-    {
-        $this->commande = $commande;
-
-        return $this;
-    }
+  
 }

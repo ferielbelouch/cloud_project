@@ -16,10 +16,14 @@ class Commande
     private ?int $id = null;
 
     /**
-     * @var Collection<int, TicketCat>
+     * @var Collection<int, Ticket>
      */
-    #[ORM\OneToMany(targetEntity: TicketCat::class, mappedBy: 'commande')]
+    #[ORM\OneToMany(targetEntity: Ticket::class, mappedBy: 'commande')]
     private Collection $ticket;
+
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $User = null;
 
     public function __construct()
     {
@@ -32,14 +36,14 @@ class Commande
     }
 
     /**
-     * @return Collection<int, TicketCat>
+     * @return Collection<int, Ticket>
      */
     public function getTicket(): Collection
     {
         return $this->ticket;
     }
 
-    public function addTicket(TicketCat $ticket): static
+    public function addTicket(Ticket $ticket): static
     {
         if (!$this->ticket->contains($ticket)) {
             $this->ticket->add($ticket);
@@ -49,7 +53,7 @@ class Commande
         return $this;
     }
 
-    public function removeTicket(TicketCat $ticket): static
+    public function removeTicket(Ticket $ticket): static
     {
         if ($this->ticket->removeElement($ticket)) {
             // set the owning side to null (unless already changed)
@@ -57,6 +61,18 @@ class Commande
                 $ticket->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): static
+    {
+        $this->User = $User;
 
         return $this;
     }
